@@ -1,0 +1,26 @@
+<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Pembuat Link Tamu</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:640px;margin:0 auto;padding:20px;color:#222}label{display:block;margin:14px 0 4px;font-weight:600}input,textarea{width:100%;font:inherit;padding:10px;border:1px solid #bbb;border-radius:8px}textarea{min-height:120px}button,a.b{font:inherit;padding:10px 16px;border:0;border-radius:8px;background:#6E2B38;color:#fff;cursor:pointer;text-decoration:none;display:inline-block}ul{list-style:none;padding:0}li{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}li span{overflow-wrap:anywhere;font-size:.85rem;color:#555}</style>
+<h1>Pembuat link tamu</h1>
+<label for="b">Link undangan klien</label><input id="b" placeholder="https://namasitus.netlify.app/nadia-raka/">
+<label for="p">Pesan WhatsApp ({nama} dan {link} akan diganti)</label>
+<textarea id="p">Kepada Yth. {nama},
+
+Dengan penuh syukur kami mengundang Anda ke acara pernikahan kami. Detail undangan ada di tautan berikut:
+{link}
+
+Terima kasih.</textarea>
+<label for="n">Daftar nama tamu (satu nama per baris)</label><textarea id="n"></textarea>
+<p><button id="g">Buat link</button> <button id="c">Salin semua</button></p><ul id="o"></ul>
+<script>
+const $=id=>document.getElementById(id);let L=[];
+$("b").value=localStorage.getItem("lt-b")||"";
+$("g").onclick=()=>{let b=$("b").value.trim();if(!b){alert("Isi link undangan dulu");return}
+ localStorage.setItem("lt-b",b);b=b.split("?")[0];
+ L=$("n").value.split("\n").map(s=>s.trim()).filter(Boolean).map(n=>({n,u:b+"?to="+encodeURIComponent(n).replace(/%20/g,"+")}));
+ $("o").innerHTML="";
+ L.forEach(x=>{const li=document.createElement("li"),s=document.createElement("span"),a=document.createElement("a");
+  s.textContent=x.n+" — "+x.u;a.className="b";a.textContent="WhatsApp";a.target="_blank";a.rel="noopener";
+  a.href="https://wa.me/?text="+encodeURIComponent($("p").value.replace("{nama}",x.n).replace("{link}",x.u));
+  li.append(s,a);$("o").append(li)})};
+$("c").onclick=()=>navigator.clipboard.writeText(L.map(x=>x.n+"\t"+x.u).join("\n")).then(()=>alert("Tersalin"));
+</script></html>
