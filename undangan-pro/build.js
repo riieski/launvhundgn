@@ -38,9 +38,15 @@ function page(slug, cfg, editor) {
   return h;
 }
 
-const KD = path.join(R, "klien"); let n = 0;
-if (fs.existsSync(KD)) for (const slug of fs.readdirSync(KD)) {
-  const d = path.join(KD, slug);
+// Folder klien boleh di klien/<nama>/ ATAU langsung di akar repo (asal berisi config.json).
+const SKIP = new Set(["assets", "alat", "klien", "dist", "node_modules", "studio"]);
+const dirs = [], KD = path.join(R, "klien"); let n = 0;
+if (fs.existsSync(KD)) for (const s of fs.readdirSync(KD)) dirs.push([s, path.join(KD, s)]);
+for (const s of fs.readdirSync(R)) {
+  const d = path.join(R, s);
+  if (!SKIP.has(s) && !s.startsWith(".") && fs.statSync(d).isDirectory() && fs.existsSync(path.join(d, "config.json"))) dirs.push([s, d]);
+}
+for (const [slug, d] of dirs) {
   if (!fs.statSync(d).isDirectory() || slug.startsWith("_")) continue;
   if (!/^[a-z0-9-]+$/.test(slug)) { console.warn("Lewati '" + slug + "': nama folder hanya boleh huruf kecil, angka, dan tanda minus."); continue; }
   let cfg = {};
@@ -49,6 +55,7 @@ if (fs.existsSync(KD)) for (const slug of fs.readdirSync(KD)) {
   fs.cpSync(d, o, { recursive: true });
   fs.rmSync(path.join(o, "config.json"), { force: true });
   fs.writeFileSync(path.join(o, "index.html"), page(slug, cfg, false));
+  console.log("  + /" + slug + "/");
   n++;
 }
 fs.mkdirSync(path.join(OUT, "studio"), { recursive: true });
