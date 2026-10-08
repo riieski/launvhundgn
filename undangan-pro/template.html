@@ -25,41 +25,62 @@ h1,h2,h3,.ser{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
 p{max-width:44ch;margin:0 auto 14px}
 
 /* Cover kartu */
-#cv{position:fixed;inset:0;z-index:50;background:radial-gradient(120% 90% at 50% 20%,#fcf6f0,var(--cream));display:flex;align-items:center;justify-content:center;text-align:center;transition:transform 1.7s cubic-bezier(.7,0,.2,1)}
-.buka #cv{transform:translateY(-104%)}
-.cvi{position:relative;z-index:2;width:62%;max-width:300px;color:var(--wine)}
+#cv{position:fixed;inset:0;z-index:50;background:radial-gradient(120% 90% at 50% 20%,#fcf6f0,var(--cream));display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity .9s}
+.buka #cv{opacity:0;pointer-events:none}
+.cvi{position:absolute;z-index:2;top:3svh;bottom:0;left:17%;right:17%;max-width:340px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 12px 18px;color:var(--wine);background:linear-gradient(#fffaf5,#f6ece3);border:1px solid #c9a25c;border-bottom:0;border-radius:999px 999px 0 0}
 .cvi .script{font-size:1.9rem;line-height:1.2}
-.ovc{width:200px;height:262px;margin:12px auto 16px;border-radius:999px 999px 14px 14px;border:3px solid var(--wine);box-shadow:0 0 0 5px var(--cream),0 0 0 6px var(--rose);overflow:hidden}
+.ovc{height:min(340px,40svh);aspect-ratio:3/4;max-width:100%;margin:8px auto 14px;border-radius:50%;border:3px solid var(--wine);box-shadow:0 0 0 5px #fffaf5,0 0 0 6px var(--rose);overflow:hidden}
 .ovc .foto{width:100%;height:100%;background:var(--foto,url(/assets/joglo.jpg)) 50% 62%/cover}
-.cvi h1{font-size:1.5rem;letter-spacing:.14em;line-height:1.3;margin-bottom:12px}
+.cvi h1{font-size:clamp(1.1rem,5.2vw,1.5rem);letter-spacing:.14em;line-height:1.3;margin-bottom:10px}
 .cvi small{display:block;font-size:.85rem;color:var(--ink)}
 .cvi em{display:block;font:600 1.3rem "Cormorant Garamond",serif;margin:2px 0 16px;font-style:normal}
 
 /* Adegan paralaks */
 .rail{height:240svh;position:relative}
 .stick{position:sticky;top:0;height:100svh;overflow:hidden;background:#e6d6cf}
-.stick{--W:min(112vw,640px)}
-.sk{position:absolute;inset:-4%;background:url(/assets/langit.jpg) 50% 30%/cover;transform:scale(calc(1 + var(--p)*.12))}
-.zm{position:absolute;inset:0;transform-origin:50% 80%;transform:scale(calc(1 + var(--p)*.85))}
-.hl{position:absolute;left:50%;bottom:-1%;width:var(--W);max-width:none;transform:translateX(-50%)}
-.rm{position:absolute;left:50%;bottom:calc(var(--W)*.195 - 1%);width:calc(var(--W)*1.17);max-width:none;transform:translateX(-50%)}
-.hl{z-index:2}
-.kp{position:absolute;width:44px;height:auto;z-index:3;animation:fly 16s ease-in-out infinite alternate,flap .38s ease-in-out infinite alternate}
-.kp1{left:14%;top:40%}
-.kp2{right:16%;top:32%;width:30px;animation:fly 21s ease-in-out -7s infinite alternate,wob 2.4s ease-in-out infinite alternate}
+.stick{--W:min(60vw,420px)}
+.sk{position:absolute;inset:-6%;background:url(/assets/langit.jpg) 50% 30%/cover;transform:scale(calc(1 + var(--p)*.12));animation:skm 40s ease-in-out infinite alternate}
+@keyframes skm{from{translate:-2% 0;scale:1.06}to{translate:2% -1.5%;scale:1.16}}
+.zm{position:absolute;inset:0;transform-origin:50% 80%;transform:scale(calc(1 + var(--p)*.85));opacity:0}
+body.buka .zm{animation:zin 2.8s 1.6s ease-out both}
+@keyframes zin{from{opacity:0;translate:0 7svh}to{opacity:1;translate:0 0}}
+.hl{position:absolute;left:50%;bottom:calc(5svh - 1%);width:var(--W);max-width:none;transform:translateX(-50%);z-index:2}
+.rm{position:absolute;left:50%;bottom:calc(5svh + var(--W)*.195 - 1%);width:calc(var(--W)*1.17);max-width:none;transform:translateX(-50%)}
+.tg3{position:absolute;top:0;bottom:0;z-index:4;pointer-events:none}
+.tgl{left:0;transform-origin:0 100%;transform:translateX(calc(var(--p)*-40%)) scale(calc(1 + var(--p)*.4))}
+.tgr{right:0;transform-origin:100% 100%;transform:translateX(calc(var(--p)*40%)) scale(calc(1 + var(--p)*.4))}
+.td{display:block;height:100%;width:auto;clip-path:inset(100% 0 0 0);transform-origin:50% 100%}
+body.buka .td{animation:tumbuh 3s 2.3s cubic-bezier(.45,0,.2,1) both,ayun 7s 5.5s ease-in-out infinite alternate}
+@keyframes tumbuh{from{clip-path:inset(100% 0 0 0);scale:.94}to{clip-path:inset(0 0 0 0);scale:1}}
+@keyframes ayun{to{rotate:1.6deg}}
+.db{position:absolute;left:0;bottom:-1%;width:100%;max-width:none;z-index:5;pointer-events:none;opacity:0;transform-origin:50% 100%}
+body.buka .db{animation:dbin 1.8s 2s ease-out both,dbay 6s 4s ease-in-out infinite alternate}
+@keyframes dbin{from{opacity:0;translate:0 40%}to{opacity:1;translate:0 0}}
+@keyframes dbay{to{scale:1.035}}
+.kp{position:absolute;height:auto;z-index:3;opacity:0}
+body.buka .kp{animation:kin 1s var(--k,5s) both,fly var(--fd,16s) var(--k,5s) ease-in-out infinite alternate,flap .38s ease-in-out infinite alternate}
+.kp1{--k:5s;left:16%;top:44%;width:44px}.kp2{--k:5.6s;--fd:21s;right:16%;top:36%;width:30px}
+.kp3{--k:6.4s;--fd:13s;left:58%;top:54%;width:32px}.kp4{--k:7s;--fd:24s;right:34%;top:26%;width:24px}
+body.buka .kp2,body.buka .kp4{animation:kin 1s var(--k) both,fly var(--fd) var(--k) ease-in-out infinite alternate,wob 2.4s ease-in-out infinite alternate}
+@keyframes kin{to{opacity:1}}
 @keyframes fly{0%{translate:0 0}50%{translate:60px -50px}100%{translate:-30px -120px}}
 @keyframes flap{to{transform:scaleX(.45)}}@keyframes wob{to{rotate:16deg}}
-.sd{position:absolute;bottom:-1%;width:min(64vw,360px);height:auto;z-index:4;pointer-events:none}
-.sdl{left:0;transform-origin:0 100%;transform:translateX(calc(var(--p)*-45%)) scale(calc(1 + var(--p)*.55))}
-.sdr{right:0;transform-origin:100% 100%;transform:translateX(calc(var(--p)*45%)) scale(calc(1 + var(--p)*.55))}
-.cs{position:absolute;bottom:0;width:46vw;max-width:260px;height:auto;pointer-events:none}.csl{left:0}.csr{right:0}
+.tirai{position:fixed;inset:0;z-index:45;pointer-events:none;overflow:hidden;background:#2c4a2a;transition:background-color 1.5s .7s}
+.tirai img{position:absolute;top:-6svh;width:62vw;height:112svh;max-width:none;object-fit:cover}
+.tk{left:-6vw;object-position:100% 50%}.tn{right:-6vw;object-position:0% 50%}
+body.buka .tirai{background-color:transparent;animation:hilang 0s 4.1s forwards}
+body.buka .tk{animation:tkb 3.2s .6s cubic-bezier(.65,0,.25,1) both}body.buka .tn{animation:tnb 3.2s .6s cubic-bezier(.65,0,.25,1) both}
+@keyframes tkb{to{translate:-118% 0;scale:1.3}}@keyframes tnb{to{translate:118% 0;scale:1.3}}
+@keyframes hilang{to{visibility:hidden}}
+.td2{position:absolute;top:0;height:100%;width:auto;z-index:3;pointer-events:none}.tdl{left:0}.tdr{right:0}
 .ring{position:absolute;left:50%;top:50%;width:122%;max-width:none;height:auto;transform:translate(-50%,-50%);pointer-events:none}
-.ttl{text-shadow:0 1px 16px #fffd;position:absolute;left:0;right:0;top:10%;text-align:center;color:var(--wine);opacity:clamp(0,calc(var(--p)*3.2 - .5),1);transform:translateY(calc((1 - var(--p))*24px));padding:0 20px}
+.ttl{text-shadow:0 1px 16px #fffd;position:absolute;left:0;right:0;top:9%;text-align:center;color:var(--wine);opacity:clamp(0,calc(1 - var(--p)*2.8),1);padding:0 24vw;z-index:6}
+.tti{opacity:0}body.buka .tti{animation:tti 1.8s 4.8s ease-out both}@keyframes tti{from{opacity:0;translate:0 24px}to{opacity:1;translate:0 0}}
 .ttl .script{font-size:2.2rem}
 .ttl h1{font-size:clamp(2.1rem,10vw,3.1rem);letter-spacing:.14em;line-height:1.2}
 .ttl h1 i{display:block;font:italic 400 1.6rem "Cormorant Garamond",serif;letter-spacing:0;color:var(--rose)}
 .ttl .tg{font:600 1.15rem "Cormorant Garamond",serif;letter-spacing:.05em;margin-top:8px}
-.gulir{position:absolute;bottom:5%;left:0;right:0;text-align:center;color:var(--cream);font-size:.85rem;opacity:calc(1 - var(--p)*4)}
+.gulir{position:absolute;bottom:11svh;left:0;right:0;text-align:center;color:var(--wine);font-size:.85rem;z-index:6;visibility:hidden;opacity:clamp(0,calc(1 - var(--p)*4),1)}body.buka .gulir{animation:gin 0s 6.4s forwards}@keyframes gin{to{visibility:visible}}
 
 /* Isi */
 .arc{position:relative;z-index:3;margin-top:-22svh;background:var(--cream);border-radius:50% 50% 0 0/9svh;padding:16svh 24px 80px}
@@ -102,13 +123,13 @@ input,select,textarea{width:100%;font:300 1rem "Jost",sans-serif;color:var(--ink
 textarea{min-height:90px;resize:vertical}form .btn{justify-self:center;margin-top:6px}
 
 /* Penutup */
-.l3{position:relative;overflow:hidden;background:linear-gradient(rgba(70,23,31,.88),rgba(70,23,31,.55) 45%,rgba(70,23,31,.1)),url(/assets/joglo.jpg) 50% 80%/cover;color:var(--cream);text-align:center;padding:110px 24px 60px;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.l3{position:relative;overflow:hidden;background:linear-gradient(rgba(70,23,31,.88),rgba(70,23,31,.55) 45%,rgba(70,23,31,.1)),url(/assets/joglo.jpg) 50% 80%/cover;color:var(--cream);text-align:center;padding:110px 22vw 60px;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
 .l3 .l3 .wrap{z-index:2}
 .l3 .script{font-size:3.6rem;line-height:1.1;margin:8px 0}
 .l3 h2{font-size:2rem}.l3 p{opacity:.92}
 #fx{position:fixed;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
 #musik{position:fixed;right:16px;bottom:16px;width:46px;height:46px;border-radius:50%;border:1px solid var(--wine);background:var(--cream);color:var(--wine);cursor:pointer;display:none;z-index:6}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1!important;transform:none!important}.zm,.db,.kp,.tti{opacity:1!important}.td{clip-path:none!important}.tirai{display:none!important}.gulir{visibility:visible!important}}
 
 [hidden]{display:none!important}
 .ul{display:grid;gap:12px;max-width:420px;margin:0 auto;text-align:left;max-height:440px;overflow:auto}
@@ -127,10 +148,11 @@ textarea{min-height:90px;resize:vertical}form .btn{justify-self:center;margin-to
 <body class="kunci">
 
 <canvas id="fx"></canvas>
+<div class="tirai"><img class="tk" src="/assets/tirai-kiri.webp" alt=""><img class="tn" src="/assets/tirai-kanan.webp" alt=""></div>
 
 <!-- COVER KARTU -->
 <div id="cv">
-  <img class="cs csl" src="/assets/sisi-kiri.webp" alt=""><img class="cs csr" src="/assets/sisi-kanan.webp" alt="">
+  <img class="td2 tdl" src="/assets/tiang-kiri.webp" alt=""><img class="td2 tdr" src="/assets/tiang-kanan.webp" alt="">
   <div class="cvi">
     <div class="script">The Wedding Of</div>
     <div class="ovc"><div class="foto" data-f="cover"></div></div>
@@ -146,10 +168,13 @@ textarea{min-height:90px;resize:vertical}form .btn{justify-self:center;margin-to
   <div class="sk"></div>
   <div class="zm"><img class="hl" src="/assets/halaman.webp" alt=""><img class="rm" src="/assets/rumah-joglo.webp" alt=""></div>
   <img class="kp kp1" src="/assets/kupu-1.webp" alt=""><img class="kp kp2" src="/assets/kupu-2.webp" alt="">
-  <img class="sd sdl" src="/assets/sisi-kiri.webp" alt=""><img class="sd sdr" src="/assets/sisi-kanan.webp" alt="">
-  <div class="ttl"><div class="script" data-t="c1">The Wedding Of</div>
+  <img class="kp kp3" src="/assets/kupu-1.webp" alt=""><img class="kp kp4" src="/assets/kupu-2.webp" alt="">
+  <div class="tg3 tgl"><img class="td" src="/assets/tiang-kiri.webp" alt=""></div>
+  <div class="tg3 tgr"><img class="td" src="/assets/tiang-kanan.webp" alt=""></div>
+  <img class="db" src="/assets/daun-bawah.webp" alt="">
+  <div class="ttl"><div class="tti"><div class="script" data-t="c1">The Wedding Of</div>
     <h1><span data-t="n1">NADIA</span><i data-t="amp">&amp;</i><span data-t="n2">RAKA</span></h1>
-    <div class="tg" data-t="tgl">Minggu, 20 Desember 2026</div></div>
+    <div class="tg" data-t="tgl">Minggu, 20 Desember 2026</div></div></div>
   <div class="gulir">Gulir ke bawah ⌄</div>
 </div></div></header>
 
@@ -219,7 +244,7 @@ textarea{min-height:90px;resize:vertical}form .btn{justify-self:center;margin-to
 
 <!-- LEMBAR 3: PENUTUP -->
 <footer class="l3" id="l3">
-  <img class="cs csl" src="/assets/sisi-kiri.webp" alt=""><img class="cs csr" src="/assets/sisi-kanan.webp" alt="">
+  <img class="td2 tdl" src="/assets/tiang-kiri.webp" alt=""><img class="td2 tdr" src="/assets/tiang-kanan.webp" alt="">
   <div class="wrap"><h2 class="ser" data-t="s7">Terima kasih</h2>
     <p data-t="ft">Kehadiran dan doa Anda adalah hadiah terindah bagi kami. Semoga Allah membalas kebaikan Anda berlipat ganda.</p>
     <div class="script" data-t="ftn">Nadia &amp; Raka</div>
@@ -256,7 +281,7 @@ function music(){if(!C.musik||au)return;au=new Audio(C.musik);au.loop=true;au.pr
 function playM(){if(!au)return;au.volume=0;au.play().then(()=>{let v=0;const t=setInterval(()=>{v=Math.min(.8,v+.05);au.volume=v;if(v>=.8)clearInterval(t)},150)}).catch(()=>{})}
 $("musik").onclick=()=>{if(au)au.paused?playM():au.pause()};
 document.addEventListener("visibilitychange",()=>{if(au&&document.hidden)au.pause()});
-$("buka").onclick=()=>{document.body.classList.add("buka");setTimeout(()=>{document.body.classList.remove("kunci");on=true},1700);playM()};
+$("buka").onclick=()=>{document.body.classList.add("buka");setTimeout(()=>{document.body.classList.remove("kunci");on=true},3800);playM()};
 
 /* Paralaks adegan */
 const rail=$("rail");let tk=false;
