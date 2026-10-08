@@ -1,0 +1,28 @@
+{
+ "t": {
+  "n1": "FITRI",
+  "n2": "RISKI\n",
+  "tgl": "Minggu, 20 Desember 2027",
+  "m2s": "Riski",
+  "ftn": "Fitri & Riski"
+ },
+ "f": {
+  "cover": "foto/cover.jpg",
+  "p1": "foto/p1.jpg",
+  "p2": "foto/p2.jpg",
+  "k1": "foto/k1.jpg",
+  "k2": "foto/k2.jpg",
+  "k3": "foto/k3.jpg",
+  "g1": "foto/g1.jpg",
+  "g2": "foto/g2.jpg",
+  "g3": "foto/g3.jpg",
+  "g4": "foto/g4.jpg"
+ },
+ "tgl": "2026-12-20T09:00",
+ "wa": "6281234567890",
+ "rsvp": "",
+ "live": "",
+ "peta": "",
+ "musik": "",
+ "tiga": false
+}
